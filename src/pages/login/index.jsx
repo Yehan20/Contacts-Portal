@@ -1,31 +1,73 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import MessageModal from '../../components/messageModal'
 import SideBar from '../../components/sideBar'
+import {  useGlobalContext } from '../../context/context'
 
 const Login = () => {
+    const navigate = useNavigate()
+   //Context Data
+   const {showMessageModal,setShowMessageModal,loginUser,errorMessage,userdata,closeModal} = useGlobalContext()
+   
+   // when user will sign up the model will close when he is navigated back 2 the login
+   useEffect(()=>{
+     closeModal();
+   },[])
+
+   // states in the component
+   const [email,setEmail] = useState('');
+   const [password,setPassword] = useState('');
+   
+   const handleSubmit = (e)=>{
+      e.preventDefault()
+      if(email==='' || password===''){
+           setShowMessageModal(true)
+           return
+      }
+      loginUser(email,password)
+
+   }
+   if(userdata){
+     console.log('correct');
+     navigate('/home',)
+   }
+
     return (
-        <div className="login-section">
-            <div className='login'>
-                <h2>Hi There
-                    <br/>
-                    <span>Welcome to our contacts portal</span>
-                </h2>
-                <form action="">
-                    <div>
-                        <input type="email" placeholder='email' required/>
+        <>
+         <div className="login-section flex flex-col lg:flex-row justify-between" >
+            <div className='login  p-20'>
+                <div className='text-white mb-14'>
+                    <h2 className=' text-heading-large font-bold '>Hi There
+                    </h2>
+                    <p className='text-heading-medium mb-0 line'>Welcome to our <br /> contacts  portal</p>
+                </div>
+
+                <form  onSubmit={(e)=>handleSubmit(e)} >
+                    <div className='mb-8'>
+                        <input type="email" value={email}  onChange={(e)=>setEmail(e.target.value)} placeholder='email'/>
                     </div>
-                    <div>
-                        <input type="passowrd" placeholder='password' required/>
+                    <div className='mb-12'>
+                        <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)}  placeholder='password'/>
                     </div>
-                    <div>
-                        <button type='submit'>login</button>
-                        or
-                        <Link to='register'>Click here to register</Link>
+                    <div className='text-white text-text-buttons pb-2'>
+
+                        <button title='Click to login' className='custom-button' type='submit'>login</button>
+
+                        &nbsp; or  &nbsp;
+                        <Link className='text-white underline' title='Click to visit' to='/register'>Click here to register</Link>
                     </div>
                 </form>
-                <SideBar/>
+
             </div>
+            <SideBar/>
         </div>
+        {(errorMessage && showMessageModal)&& <MessageModal message={errorMessage}/>}
+        {(showMessageModal && !errorMessage) && <MessageModal message={"Please fill all feilds"}/>}
+
+        </>
+
 
     )
 }
