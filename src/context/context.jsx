@@ -103,6 +103,7 @@ const AppProvider = ({children}) => {
          // can be same email or else
         setErrorMessage(e.response.data.message);
         setShowMessageModal(true)
+        setSuccess(false)
         setLoading(false)
       }
   }
