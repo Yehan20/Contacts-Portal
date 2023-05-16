@@ -6,7 +6,7 @@ import SideBar from '../../components/sideBar'
 import { useGlobalContext } from '../../context/context';
 
 const Register = () => {
-    const {showMessageModal,setShowMessageModal,errorMessage,success,register} = useGlobalContext()
+    const {showMessageModal,setShowMessageModal,errorMessage,success,register,loading} = useGlobalContext()
 
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
@@ -52,7 +52,7 @@ const Register = () => {
                         <input value={verifypassword} onChange={(e)=>setVerifyPassword(e.target.value)}  type="password" placeholder='confirm password'/>
                     </div>
                     <div className='text-white text-text-buttons  mb-5'>
-                        <button  type='submit' title='Click to login' className='custom-button'>register</button>
+                     <button disabled={loading}  type='submit' title='Click to login' className='custom-button'>register</button>
 
                     </div>
                     <Link to='/' className='text-white underline text-text-buttons'> &lt; Back to Login</Link>

@@ -29,6 +29,7 @@ const Home = () => {
     const [contacts,setContacts]= useState([]);
     const [showPromptModal,setShowPromptModal] =useState(false);
     const [deleteUser,setDeleteUser]=useState('');
+    const [loading,setLoading]=useState(false);
 
 
     const togglePrompt=()=>{
@@ -38,7 +39,9 @@ const Home = () => {
     const deleteContact = async(id)=>{
         try{
             const result =await axios.delete('http://localhost:3001/contacts/delete/'+id,{headers})
-            console.log(result.data);
+            setContacts(result.data.contacts);
+            setShowPromptModal(false);
+            setShowMessageModal(true);
         }catch(e){
             console.log(e.response.data.message)
         }
@@ -46,6 +49,8 @@ const Home = () => {
     }
 
     const updateContact = async(updatedUser)=>{
+
+     setDeleteUser('')
      const newUser={ 
             newFullName:updatedUser.modifiedFullName,
             newEmail:updatedUser.modifiedEmail,
@@ -59,12 +64,12 @@ const Home = () => {
          setShowMessageModal(true)
      }catch(e){
          console.log(e.response.data.message);
-         //setError(e.response.data.message)
-         //setShowMessageModal(true)
+
      }
     }
 
     useEffect(()=>{
+        setLoading(true)
         const abortController = new AbortController();
         const signal = abortController.signal;
         const getContacts =  async()=>{
@@ -75,8 +80,10 @@ const Home = () => {
 
                 console.log(contactList.data.contacts)
                 setContacts(contactList.data.contacts)
+                setLoading(false)
             }catch(e){
                 console.log(e.response.data.message);
+                setLoading(false)
             }
         }
 
@@ -87,6 +94,7 @@ const Home = () => {
 
     return (
         <>
+        
          {contacts.length<1 && <div className='text-white'>
             <h2 className='text-heading-large font-bold'>
                 Welcome
@@ -104,7 +112,7 @@ const Home = () => {
            <h2 className='text-4xl text-white font-bold '>
             Contacts
             </h2>
-            <button className='text-lg custom-button'>Add new Contact</button>
+            <Link to='/home/add' className='text-lg custom-button'>Add new Contact</Link>
          </div>
 
          <div className='bg-white px-10 py-5 rounded-3xl'>
@@ -123,7 +131,7 @@ const Home = () => {
               </thead>
               <tbody>
                  {
-                    contacts.map((contact)=>{
+                    !loading && contacts.map((contact)=>{
                         return <Tablerow key={contact._id} 
                                          updateContact={updateContact} 
                                          contact={contact}
@@ -131,16 +139,22 @@ const Home = () => {
                                          togglePrompt={togglePrompt}
                                          setDeleteUser={setDeleteUser}
                                         
-                                         />
+                      />
                     })
                  }
+                 {loading && <tr><td>Loading..</td></tr>}
+
               </tbody>
            </table>
         </div>
         </div>}
 
         {showMessageModal && <MessageModal message={"Your contact has been saved successfully!"}/>}
-        {showPromptModal &&  <MessagePromptModal  deleteContact={deleteContact}  deleteUser={deleteUser} togglePromptModal={togglePrompt} fullName={"Name"}/>}
+
+        {showPromptModal &&  <MessagePromptModal  deleteContact={deleteContact} 
+           deleteUser={deleteUser} togglePromptModal={togglePrompt} fullName={"Name"}/>}
+
+        {(showMessageModal && deleteUser) &&  <MessageModal message={"Your contact has been deleted successfully!"}/>}
       </>
 
     )

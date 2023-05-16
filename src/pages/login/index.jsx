@@ -9,7 +9,8 @@ import {  useGlobalContext } from '../../context/context'
 const Login = () => {
     const navigate = useNavigate()
    //Context Data
-   const {showMessageModal,setShowMessageModal,loginUser,errorMessage,userdata,closeModal} = useGlobalContext()
+   const {showMessageModal,setShowMessageModal,
+    loginUser,errorMessage,userdata,closeModal,loading} = useGlobalContext()
    
    // when user will sign up the model will close when he is navigated back 2 the login
    useEffect(()=>{
@@ -29,6 +30,7 @@ const Login = () => {
       loginUser(email,password)
 
    }
+   
    if(userdata){
      console.log('correct');
      navigate('/home',)
@@ -37,7 +39,7 @@ const Login = () => {
     return (
         <>
          <div className="login-section flex flex-col lg:flex-row justify-between" >
-            <div className='login  p-20'>
+            <div className='login  p-20 py-28'>
                 <div className='text-white mb-14'>
                     <h2 className=' text-heading-large font-bold '>Hi There
                     </h2>
@@ -53,7 +55,7 @@ const Login = () => {
                     </div>
                     <div className='text-white text-text-buttons pb-2'>
 
-                        <button title='Click to login' className='custom-button' type='submit'>login</button>
+                   <button disabled={loading} title='Click to login' className='custom-button' type='submit'>login</button>
 
                         &nbsp; or  &nbsp;
                         <Link className='text-white underline' title='Click to visit' to='/register'>Click here to register</Link>

@@ -1,15 +1,13 @@
 // Consits of the auth operations and store of the jwt token
 import axios from 'axios';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useContext } from 'react';
-import { useNavigate } from 'react-router';
+
 
 const AppContext = React.createContext();
 
 const AppProvider = ({children}) => {
-  //reacr router based hooks
-  //const navigate = useNavigate(); 
 
   axios.defaults.withCredentials=true;
 
@@ -18,7 +16,28 @@ const AppProvider = ({children}) => {
   const [errorMessage,setErrorMessage] = useState('');
   const [userdata,setUserData] = useState('');
   const [success,setSuccess]= useState('');
-  const [loading,setLoading] = useState(true)
+  const [loading,setLoading] = useState(false)
+
+  //refresh token function 
+
+  const refreshToken = async () => {
+   //refresh tken done
+
+   console.log('refresh token method run')
+   try {
+     const response = await axios.post('http://localhost:3001/token/',{
+        id:userdata._id,
+        token:localStorage.getItem('refreshToken')
+     });
+     
+     const newToken = response.data.accessToken
+
+     localStorage.setItem('accessToken', newToken);
+
+   } catch (error) {
+     console.log('Token refresh failed:', error);
+   }
+ };
 
 
 
@@ -44,34 +63,40 @@ const AppProvider = ({children}) => {
   }
 
   const loginUser = async(email,password)=>{
+     setLoading(true)
      try{
       const user = await axios.post('http://localhost:3001/login',{email,password})
       // update states
       setUserData({email:user.data.email,_id:user.data.id});
       setLoggedUser(true)
-
+      setLoading(false)
       // store token i local storeage
       localStorage.setItem('accessToken',user.data.accessToken);
+      localStorage.setItem('refreshToken',user.data.refreshToken)
    
      }catch(e){
       // wrong login 
       console.log(e.response.data.message);
        setErrorMessage(e.response.data.message);
        setShowMessageModal(true);
+       setLoading(false)
      }
   }
 
   const register = async(email,password)=>{
+    setLoading(true)
     setUserData('')
       try{
          await axios.post('http://localhost:3001/register',{email,password});
          setSuccess(true)
          setShowMessageModal(true)
+         setLoading(false)
       }catch(e){
          console.log(e.response.data.message);
          // can be same email or else
         setErrorMessage(e.response.data.message);
         setShowMessageModal(true)
+        setLoading(false)
       }
   }
 
@@ -87,6 +112,15 @@ const AppProvider = ({children}) => {
      }
   }
 
+  useEffect(() => {
+   if(!isLogged) return
+   const refreshInterval = setInterval(refreshToken, 60000); // Refresh token every 10 minutes
+
+   return () => {
+     clearInterval(refreshInterval);
+   };
+ }, [userdata]);
+
 
   return (
     <AppContext.Provider value={{isLogged,
@@ -99,7 +133,8 @@ const AppProvider = ({children}) => {
           userdata,
           register,
           success,
-          logout
+          logout,
+          loading
           
           }}>
        {children}

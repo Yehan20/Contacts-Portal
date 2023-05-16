@@ -15,7 +15,7 @@ import ProtectedRoute from './privateroutes/protectedRoute';
 function App() {
   const {isLogged} = useGlobalContext()
   useEffect(()=>{
-     console.log('ran');
+   
       isLogged()
   },[])
 
