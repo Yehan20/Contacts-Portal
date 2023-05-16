@@ -13,10 +13,10 @@ import PrivateRoute from './privateroutes/privateHome';
 import ProtectedRoute from './privateroutes/protectedRoute';
 
 function App() {
-  const {isLogged} = useGlobalContext()
+  const {isLogged,userdata} = useGlobalContext()
   useEffect(()=>{
-   
-      isLogged()
+      console.log(userdata)
+      isLogged(userdata)
   },[])
 
 

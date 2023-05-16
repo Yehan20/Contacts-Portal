@@ -112,7 +112,7 @@ const AddContact = () => {
     </form>
    </div>
    {(showMessageModal) && <MessageModal message={"Please fill feilds"}/>}
-   {(addedContact) && <MessageModal canRedirect={true} message={"Your have added your first Contact"}/>}
+   {(addedContact) && <MessageModal canRedirect={true} message={"New contact saved"}/>}
    </>
 
   )

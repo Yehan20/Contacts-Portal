@@ -52,10 +52,10 @@ const Register = () => {
                         <input value={verifypassword} onChange={(e)=>setVerifyPassword(e.target.value)}  type="password" placeholder='confirm password'/>
                     </div>
                     <div className='text-white text-text-buttons  mb-5'>
-                     <button disabled={loading}  type='submit' title='Click to login' className='custom-button'>register</button>
+                     <button disabled={loading}  type='submit' title='Click to Register' className='custom-button'>register</button>
 
                     </div>
-                    <Link to='/' className='text-white underline text-text-buttons'> &lt; Back to Login</Link>
+                    <Link to='/'  className='text-white underline text-text-buttons'> &lt; Back to Login</Link>
                 </form>
             </div>
             <SideBar/>

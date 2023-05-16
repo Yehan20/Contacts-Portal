@@ -25,7 +25,10 @@ const AppProvider = ({children}) => {
 
    console.log('refresh token method run')
    try {
-     const response = await axios.post('http://localhost:3001/token/',{
+     
+      //http://localhost:3001/token/
+      //https://glamorous-dove-skirt.cyclic.app/token
+      const response = await axios.post('http://localhost:3001/token/',{
         id:userdata._id,
         token:localStorage.getItem('refreshToken')
      });
@@ -48,6 +51,8 @@ const AppProvider = ({children}) => {
 
   const isLogged = async()=>{
      console.log('run');
+     //http://localhost:3001/login
+     // https://glamorous-dove-skirt.cyclic.app/login
      try{
       const user = await axios.get('http://localhost:3001/login')
       console.log(user.data)
@@ -64,10 +69,12 @@ const AppProvider = ({children}) => {
 
   const loginUser = async(email,password)=>{
      setLoading(true)
+     //http://localhost:3001/login
+     //https://glamorous-dove-skirt.cyclic.app/login 
      try{
       const user = await axios.post('http://localhost:3001/login',{email,password})
       // update states
-      setUserData({email:user.data.email,_id:user.data.id});
+      setUserData({email:user.data.email,_id:user.data._id});
       setLoggedUser(true)
       setLoading(false)
       // store token i local storeage
@@ -104,7 +111,10 @@ const AppProvider = ({children}) => {
    console.log('logouts')
      try{
        await axios.delete('http://localhost:3001/logout/'+ _id.toString())
+
        localStorage.removeItem('accessToken'),
+       localStorage.removeItem('refreshToken')
+
        setUserData('')
        setLoggedUser(false)
      }catch(e){
@@ -114,7 +124,7 @@ const AppProvider = ({children}) => {
 
   useEffect(() => {
    if(!isLogged) return
-   const refreshInterval = setInterval(refreshToken, 60000); // Refresh token every 10 minutes
+   const refreshInterval = setInterval(refreshToken, 1500000); // Refresh token every 25 minutes
 
    return () => {
      clearInterval(refreshInterval);
