@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react'
+import { useEffect } from 'react';
 import { useState } from 'react';
 import MessageModal from '../../components/messageModal';
 import { useGlobalContext } from '../../context/context';
@@ -7,7 +8,7 @@ import { useGlobalContext } from '../../context/context';
 const AddContact = () => {
   axios.defaults.withCredentials=true;
   // context api values
-  const {showMessageModal,setShowMessageModal,loginUser,userdata,closeModal} = useGlobalContext()
+  const {showMessageModal,setShowMessageModal} = useGlobalContext()
  
 // state
   const [contactUser,setContactUser]= useState({
@@ -18,6 +19,12 @@ const AddContact = () => {
   })
 
   const [addedContact,setAddedContact] = useState('')
+  const [contactAmount,setIsContactAmount] = useState(true)
+
+  useEffect(()=>{
+       const amount = localStorage.getItem('contactAmount')
+      setIsContactAmount(amount)
+  },[])
 
   const handleInput = (target)=>{
      const name = target.name;
@@ -106,7 +113,7 @@ const AddContact = () => {
 
 
      <div className='text-white text-text-buttons  mb-5'>
-     <button  type='submit' title='Click to add' className='custom-button'>Add your first Contact</button>
+     <button  type='submit' title='Click to add' className='custom-button'>{ contactAmount<1?"Add your first Contact":'Add your Contact'}</button>
 
      </div>
     </form>

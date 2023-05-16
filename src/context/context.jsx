@@ -114,6 +114,7 @@ const AppProvider = ({children}) => {
 
        localStorage.removeItem('accessToken'),
        localStorage.removeItem('refreshToken')
+       localStorage.removeItem('contactAmount')
 
        setUserData('')
        setLoggedUser(false)

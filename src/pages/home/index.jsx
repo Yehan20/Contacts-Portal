@@ -80,6 +80,7 @@ const Home = () => {
 
                 console.log(contactList.data.contacts)
                 setContacts(contactList.data.contacts)
+                localStorage.setItem("contactAmount",contactList.data.contacts.length);
                 setLoading(false)
             }catch(e){
                 console.log(e.response.data.message);
