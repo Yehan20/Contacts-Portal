@@ -47,6 +47,7 @@ const AppProvider = ({children}) => {
   const closeModal = ()=>{
     setErrorMessage('');
     setShowMessageModal(false)
+    setSuccess(false)
   }
 
   const isLogged = async()=>{
@@ -93,7 +94,7 @@ const AppProvider = ({children}) => {
   const register = async(email,password)=>{
     setLoading(true)
     setUserData('')
-    setSuccess(false)
+
       try{
          await axios.post('https://twc-contact-portal-api.onrender.com/register',{email,password});
          setSuccess(true)
