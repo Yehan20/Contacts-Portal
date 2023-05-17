@@ -109,22 +109,22 @@ const Home = () => {
         {contacts.length>0 &&
         <div>
    
-        <div className='flex items-center justify-between mb-10'>
+        <div className='flex items-start justify-between mb-10 flex-col gap-y-2 sm:flex-row sm:items-center'>
            <h2 className='text-4xl text-white font-bold '>
             Contacts
             </h2>
             <Link to='/home/add' className='text-lg custom-button'>Add new Contact</Link>
          </div>
 
-         <div className='bg-white px-10 py-5 rounded-3xl'>
-           <table className='w-full text-greenColor border-separate border-spacing-4'>
+         <div className='bg-white  px-2 lg:px-10 py-5 rounded-3xl'>
+           <table className='w-full text-greenColor border-separate border-spacing-2 lg:border-spacing-4'>
               <thead>
-                <tr>
+                <tr className='hidden lg:table-row font-normal'>
                     <th></th>
-                    <th>Full Name</th>
-                    <th>Gender</th>
-                    <th>Email</th>
-                    <th>Phone number</th>
+                    <th>full name</th>
+                    <th>gender</th>
+                    <th>e-mail</th>
+                    <th>phone number</th>
                     <th>
                    
                     </th>

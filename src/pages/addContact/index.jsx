@@ -77,11 +77,11 @@ const AddContact = () => {
    <>
     <div className='add-contact px-30'>
 
-    <h2 className='text-white font-bold text-heading-large mb-14'>New Contact</h2>
+    <h2 className='text-white font-bold text-heading-medium  lg:text-heading-large mb-6 lg:mb-14'>New Contact</h2>
 
    <form onSubmit={handleSubmit} className=''>
 
-   <div className='flex flex-col lg:flex-row'>
+   <div className='flex flex-col lg:flex-row gap-x-2'>
 
     <div className='mb-8 w-full'>
         <input name='contactFullName' value={contactUser.contactFullName}  onChange={(e)=>handleInput(e.target)}   type="text" placeholder='full name'/>
@@ -91,12 +91,12 @@ const AddContact = () => {
         </div>
    </div>
 
-    <div className='flex flex-col lg:flex-row'>
-      <div className='mb-12 w-full'>
+    <div className='flex flex-col lg:flex-row gap-x-2'>
+      <div className='mb-6 lg:mb-12 w-full'>
             <input name='contactNumber' value={contactUser.contactNumber} onChange={(e)=>handleInput(e.target)}  type="number" placeholder='phone number'/>
         </div>
 
-      <div className='flex text-white mb-12 w-full gap-11 items-center'>
+      <div className='flex flex-col lg:flex-row items-start text-white mb-12 w-full lg:gap-11 lg:items-center'>
         <span className='text-xl font-normal'>gender </span>
          <div className='flex items-center'>
            <input id='m'  type="radio" name="contactGender"  className='appearance-none border-2 rounded-full  bg-greenColor checked:bg-white' value="male" checked={contactUser.contactGender==='male'} onChange={(e)=>handleInput(e.target)}/>
@@ -113,7 +113,7 @@ const AddContact = () => {
 
 
      <div className='text-white text-text-buttons  mb-5'>
-     <button  type='submit' title='Click to add' className='custom-button'>{ contactAmount<1?"Add your first Contact":'Add your Contact'}</button>
+     <button  type='submit' title='Click to add' className='text-lg lg:text-xl custom-button'>{ contactAmount<1?"Add your first Contact":'Add your Contact'}</button>
 
      </div>
     </form>

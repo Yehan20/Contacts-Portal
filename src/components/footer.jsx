@@ -12,7 +12,7 @@ const Footer = () => {
   }
   return (
     <div className='flex justify-end mt-6'>
-       <button onClick={()=>logout(userdata._id)} className='flex gap-2 items-center underline text-white text-2xl'>
+       <button onClick={()=>logout(userdata._id)} className='static lg:relative lg:-right-20  flex gap-2 items-center underline text-white text-2xl'>
         <img src={LogoutIcon} alt="Icon"  /> logout</button>
     </div>
   )

@@ -2,6 +2,9 @@
 
 In this small app user can register and manage their own personal contacts
 
+![Image Description](./src/assets/images/lg.png)
+![Image Description](./src/assets/images/sm.png)
+
 Link to the application: NA
 
 ### Try it out with these fake credentials

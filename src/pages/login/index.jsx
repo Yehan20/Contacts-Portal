@@ -39,11 +39,11 @@ const Login = () => {
     return (
         <>
          <div className="login-section flex flex-col lg:flex-row justify-between" >
-            <div className='login  p-20 py-28'>
-                <div className='text-white mb-14'>
+            <div className='login p-10  sm:px-20 sm:py-28 '>
+                <div className='text-white mb-5 sm:mb-14'>
                     <h2 className=' text-heading-large font-bold '>Hi There
                     </h2>
-                    <p className='text-heading-medium mb-0 line'>Welcome to our <br /> contacts  portal</p>
+                    <p className='text-2xl sm:text-heading-medium mb-0 line'>Welcome to our <br /> contacts  portal</p>
                 </div>
 
                 <form  onSubmit={(e)=>handleSubmit(e)} >
@@ -58,7 +58,7 @@ const Login = () => {
                    <button disabled={loading} title='Click to login' className='custom-button' type='submit'>login</button>
 
                         &nbsp; or  &nbsp;
-                        <Link className='text-white underline' title='Click to visit' to='/register'>Click here to register</Link>
+                        <Link className='mt-2 block sm:inline text-white underline' title='Click to visit' to='/register'>Click here to register</Link>
                     </div>
                 </form>
 

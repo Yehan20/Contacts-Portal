@@ -6,7 +6,7 @@ import Header from '../components/header'
 const HomeLayout = () => {
   return (
     <div className="outer">
-      <div className='inner py-28 px-32'>
+      <div className='inner py-20 px-10 bg-greenColor lg:bg-transparent  lg:py-28 lg:px-32'>
         <Header/>
         <Outlet/>
         <Footer/>

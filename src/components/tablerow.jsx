@@ -3,13 +3,11 @@ import { useState } from 'react'
 import { FaPencilAlt, FaTrash,FaSyncAlt } from 'react-icons/fa'
 import Man from '../assets/images/man.png'
 import Women from '../assets/images/women.png'
-import { useGlobalContext } from '../context/context'
-import MessagePromptModal from './messagePromt'
+
 
 
 const Tablerow = ({contact,updateContact,togglePrompt,setDeleteUser}) => {
   
-  // global
 
 
   const [edit,setEdit] = useState(false);
@@ -52,15 +50,15 @@ const Tablerow = ({contact,updateContact,togglePrompt,setDeleteUser}) => {
   return (
        <>
          <tr>
-          <td><img alt='gender' className='w-10 h-10' src={contact.gender==="male"?Man:Women}/></td>
+          <td className='mb-1 block lg:table-cell'><img alt='gender' className='w-10 h-10' src={contact.gender==="male"?Man:Women}/></td>
 
-          <td>{edit?(
+          <td className='mb-1 block lg:table-cell'>{edit?(
                <input name='modifiedFullName' onChange={(e)=>handleChange(e.target)}
                className='bg-slate-200 px-2 py-1' value={modifedUser.modifiedFullName}/>):
                 contact.fullName}
           </td>
 
-          <td>
+          <td className='mb-1 block lg:table-cell'>
             {edit?(
               <span className='flex  items-center  gap-1 bg-slate-200 px-2 py-1'>{changeGender}
                <FaSyncAlt className='cursor-pointer' size={'10px'} onClick={()=>toggleGender(changeGender)}/> 
@@ -68,19 +66,19 @@ const Tablerow = ({contact,updateContact,togglePrompt,setDeleteUser}) => {
             ):contact.gender}
           </td>
 
-          <td>{edit?(
+          <td className='mb-1 block lg:table-cell'>{edit?(
               <input  name='modifiedEmail' onChange={(e)=>handleChange(e.target)} 
               className='bg-slate-200 px-2 py-1' value={modifedUser.modifiedEmail}/>):
               contact.email}
           </td>
 
-          <td>{edit?
+          <td className='mb-1 block lg:table-cell'>{edit?
                (<input  name='modifiedNumber' onChange={(e)=>handleChange(e.target)}  className='bg-slate-200 px-2 py-1' value={modifedUser.modifiedNumber}/>
                ):contact.phoneNumber}
          </td>
 
-         <td>
-            <div className='flex justify-end gap-3'>
+         <td className='mb-1 block lg:table-cell'>
+            <div className='flex justify-start lg:justify-end gap-3'>
                {edit?<button onClick={handleSave} className='bg-greenColor hover:opacity-70 text-white inline-block px-3 py-1 rounded-2xl'>save</button>:
                   <>
                   <button onClick={toggleEdit}><FaPencilAlt color='#083F46'/></button>

@@ -126,7 +126,7 @@ const AppProvider = ({children}) => {
 
   useEffect(() => {
    if(!isLogged) return
-   const refreshInterval = setInterval(refreshToken, 1500000); // Refresh token every 25 minutes
+   const refreshInterval = setInterval(refreshToken,1500000); // Refresh token every 25 minutes
 
    return () => {
      clearInterval(refreshInterval);

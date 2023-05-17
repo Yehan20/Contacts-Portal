@@ -38,8 +38,8 @@ const Register = () => {
     return (
         <>
          <div className="register-section flex justify-between  flex-col lg:flex-row">
-            <div className='register p-20'>
-                <h2 className='text-white font-bold text-heading-large mb-14'>Register Now
+            <div className='register p-10 sm:p-20'>
+                <h2 className='text-white font-bold text-heading-medium sm:text-heading-large mb-5 sm:mb-14'>Register Now
                 </h2>
                 <form onSubmit={handleSubmit} className=''>
                     <div className='mb-8'>

@@ -90,6 +90,11 @@ input[type=number] {
     border-radius: 1.5em;
     
 }
+@media screen and (max-width:640px) {
+    .modal-form{
+        max-width: 350px;
+    }
+}
 .modal-button{
     border-radius: 1.5em;;
 }
