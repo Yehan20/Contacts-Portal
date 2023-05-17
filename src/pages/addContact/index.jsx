@@ -52,10 +52,10 @@ const AddContact = () => {
       "Authorization":token,
       "Content-Type": 'application/json'
     }
-
-    
+ 
+  //http://localhost:3001/contacts/add   
     try{
-      const newUser = await axios.post('http://localhost:3001/contacts/add',{
+      const newUser = await axios.post('https://twc-contact-portal-api.onrender.com/contacts/add',{
 
         fullName:contactUser.contactFullName,
         gender:contactUser.contactGender,

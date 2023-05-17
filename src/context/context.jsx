@@ -27,8 +27,8 @@ const AppProvider = ({children}) => {
    try {
      
       //http://localhost:3001/token/
-      //https://glamorous-dove-skirt.cyclic.app/token
-      const response = await axios.post('http://localhost:3001/token/',{
+      //https://twc-contact-portal-api.onrender.com/
+      const response = await axios.post('https://twc-contact-portal-api.onrender.com/token',{
         id:userdata._id,
         token:localStorage.getItem('refreshToken')
      });
@@ -54,7 +54,7 @@ const AppProvider = ({children}) => {
      //http://localhost:3001/login
      // https://glamorous-dove-skirt.cyclic.app/login
      try{
-      const user = await axios.get('http://localhost:3001/login')
+      const user = await axios.get('https://twc-contact-portal-api.onrender.com/login')
       console.log(user.data)
       setUserData(user.data.user)
       setLoggedUser(user.data.isLogged)
@@ -72,7 +72,7 @@ const AppProvider = ({children}) => {
      //http://localhost:3001/login
      //https://glamorous-dove-skirt.cyclic.app/login 
      try{
-      const user = await axios.post('http://localhost:3001/login',{email,password})
+      const user = await axios.post('https://twc-contact-portal-api.onrender.com/login',{email,password})
       // update states
       setUserData({email:user.data.email,_id:user.data._id});
       setLoggedUser(true)
@@ -94,7 +94,7 @@ const AppProvider = ({children}) => {
     setLoading(true)
     setUserData('')
       try{
-         await axios.post('http://localhost:3001/register',{email,password});
+         await axios.post('https://twc-contact-portal-api.onrender.com/register',{email,password});
          setSuccess(true)
          setShowMessageModal(true)
          setLoading(false)
@@ -111,7 +111,7 @@ const AppProvider = ({children}) => {
   const logout = async(_id)=>{
    console.log('logouts')
      try{
-       await axios.delete('http://localhost:3001/logout/'+ _id.toString())
+       await axios.delete('https://twc-contact-portal-api.onrender.com/logout/'+ _id.toString())
 
        localStorage.removeItem('accessToken'),
        localStorage.removeItem('refreshToken')

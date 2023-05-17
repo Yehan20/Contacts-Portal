@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React from 'react'
+import { useRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import MessageModal from '../../components/messageModal';
 import MessagePromptModal from '../../components/messagePromt';
-
+import { FiLoader } from 'react-icons/fi';
 import Tablerow from '../../components/tablerow';
 import { useGlobalContext } from '../../context/context';
 
@@ -13,7 +14,7 @@ import { useGlobalContext } from '../../context/context';
 
 const Home = () => {
     const {setShowMessageModal,showMessageModal} = useGlobalContext()
-    
+    const linkRef = useRef() 
     // to allow us pass the jwt token
     const token = localStorage.getItem('accessToken')
 
@@ -26,7 +27,7 @@ const Home = () => {
 
     axios.defaults.withCredentials=true;
 
-    const [contacts,setContacts]= useState([]);
+    const [contacts,setContacts]= useState('');
     const [showPromptModal,setShowPromptModal] =useState(false);
     const [deleteUser,setDeleteUser]=useState('');
     const [loading,setLoading]=useState(false);
@@ -37,8 +38,9 @@ const Home = () => {
     }
    
     const deleteContact = async(id)=>{
+        //http://localhost:3001/contacts/delete/
         try{
-            const result =await axios.delete('http://localhost:3001/contacts/delete/'+id,{headers})
+            const result =await axios.delete('https://twc-contact-portal-api.onrender.com/contacts/delete/'+id,{headers})
             setContacts(result.data.contacts);
             setShowPromptModal(false);
             setShowMessageModal(true);
@@ -49,7 +51,8 @@ const Home = () => {
     }
 
     const updateContact = async(updatedUser)=>{
-
+     
+     linkRef.current.style.pointerEvents = 'none'   
      setDeleteUser('')
      const newUser={ 
             newFullName:updatedUser.modifiedFullName,
@@ -59,13 +62,14 @@ const Home = () => {
             id:updatedUser._id,
      }
      try{
-         const result = await axios.put('http://localhost:3001/contacts/update',newUser,{headers})
+         const result = await axios.put('https://twc-contact-portal-api.onrender.com/contacts/update',newUser,{headers})
          setContacts(result.data.contacts)
          setShowMessageModal(true)
      }catch(e){
          console.log(e.response.data.message);
 
      }
+     linkRef.current.style.pointerEvents = ''   
     }
 
     useEffect(()=>{
@@ -73,10 +77,10 @@ const Home = () => {
         const abortController = new AbortController();
         const signal = abortController.signal;
         const getContacts =  async()=>{
-            
-
+           //http://localhost:3001/contacts/show 
+           
             try{
-            const contactList = await axios.post("http://localhost:3001/contacts/show",{},{headers},signal)
+            const contactList = await axios.post("https://twc-contact-portal-api.onrender.com/contacts/show",{},{headers},signal)
 
                 console.log(contactList.data.contacts)
                 setContacts(contactList.data.contacts)
@@ -95,8 +99,8 @@ const Home = () => {
 
     return (
         <>
-        
-         {contacts.length<1 && <div className='text-white'>
+         {!contacts &&<FiLoader className='mx-auto' size={'55px'} color={'white'}/>}
+         {(contacts&&contacts.length<1) && <div className='text-white'>
             <h2 className='text-heading-large font-bold'>
                 Hello
             </h2>
@@ -105,14 +109,13 @@ const Home = () => {
             </p>
             <Link to='/contacts/new' className='text-2xl custom-button' title='Click to Add'>add your first contact</Link>
         </div>}
-        {contacts.length>0 &&
+        {contacts && contacts.length>=1 &&
         <div>
-   
         <div className='flex items-start justify-between mb-10 flex-col gap-y-2 sm:flex-row sm:items-center'>
            <h2 className='text-4xl text-white font-bold '>
             Contacts
             </h2>
-            <Link to='/contacts/new' className='text-lg custom-button'>Add new Contact</Link>
+            <Link ref={linkRef}  to='/contacts/new' className='text-lg custom-button'>Add new Contact</Link>
          </div>
 
          <div className='bg-white  px-2 lg:px-10 py-5 rounded-3xl'>

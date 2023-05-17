@@ -63,7 +63,7 @@ const Register = () => {
         {(showMessageModal && !isSamePass ) && <MessageModal message="Fill all Feilds"/>}
         {(showMessageModal && isSamePass) && <MessageModal message="Not Matching Passwords"/>}
         {(showMessageModal && errorMessage) && <MessageModal message={errorMessage}/>}
-        {(showMessageModal && success) && <MessageModal canRedirect={true} message={"User Created now you can login"}/>}
+        {(showMessageModal && success) && <MessageModal redirectLogin={true} message={"User Created now you can login"}/>}
      </>
 
     )
