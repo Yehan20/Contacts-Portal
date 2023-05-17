@@ -9,6 +9,7 @@ import AddContact from './pages/addContact';
 import Home from './pages/home';
 import Login from './pages/login'
 import Register from './pages/register';
+import Welcome from './pages/welcome';
 import PrivateRoute from './privateroutes/privateHome';
 import ProtectedRoute from './privateroutes/protectedRoute';
 
@@ -34,10 +35,11 @@ function App() {
           <Register/>
         </ProtectedRoute>}/>
 
-        <Route  path='home' errorElement={<NotFound/>} element={<HomeLayout/>}>
-          
-              <Route index element={<PrivateRoute > <Home/> </PrivateRoute>   }/>
-              <Route path='add' element={
+        <Route  path='contacts' errorElement={<NotFound/>} element={<HomeLayout/>}>
+              
+             <Route index element={<PrivateRoute > <Welcome/> </PrivateRoute>   }/>
+              <Route path='all' element={<PrivateRoute > <Home/> </PrivateRoute>   }/>
+              <Route path='new' element={
                <PrivateRoute >
                    <AddContact/>
                </PrivateRoute> 

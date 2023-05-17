@@ -13,7 +13,7 @@ const MessageModal = ({message,canRedirect}) => {
                 {!canRedirect && <button onClick={closeModal} className="modal-button text-lg inline-block bg-greenColor text-white px-7 py-2">
                     Okay
                 </button>}
-                {canRedirect && <Link  className="modal-button text-lg inline-block bg-greenColor text-white px-7 py-2" to={'/'}> Okay </Link>}
+                {canRedirect && <Link  className="modal-button text-lg inline-block bg-greenColor text-white px-7 py-2" to={'/contacts/all'}> Okay </Link>}
             </div>
         </div>
     )

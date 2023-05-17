@@ -33,7 +33,7 @@ const Login = () => {
    
    if(userdata){
      console.log('correct');
-     navigate('/home',)
+     navigate('/contacts',)
    }
 
     return (

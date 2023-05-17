@@ -6,7 +6,7 @@ const ProtectedRoute = ({children}) => {
     const {loggedUser} = useGlobalContext()
   
     if(loggedUser){
-      return <Navigate to={'/home'} replace={true}/>
+      return <Navigate to={'/contacts'} replace={true}/>
     } 
     return loggedUser===null?'': children
   

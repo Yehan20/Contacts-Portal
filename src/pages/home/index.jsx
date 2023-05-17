@@ -98,13 +98,12 @@ const Home = () => {
         
          {contacts.length<1 && <div className='text-white'>
             <h2 className='text-heading-large font-bold'>
-                Welcome
+                Hello
             </h2>
             <p className='text-heading-medium leading-tight mb-12 '>
-                This is where your contacts will live. Click the button below 
-                to add a new contact
+                Looks like you have not added any contacts click below to add one
             </p>
-            <Link to='/home/add' className='text-2xl custom-button' title='Click to Add'>add your first contact</Link>
+            <Link to='/contacts/new' className='text-2xl custom-button' title='Click to Add'>add your first contact</Link>
         </div>}
         {contacts.length>0 &&
         <div>
@@ -113,7 +112,7 @@ const Home = () => {
            <h2 className='text-4xl text-white font-bold '>
             Contacts
             </h2>
-            <Link to='/home/add' className='text-lg custom-button'>Add new Contact</Link>
+            <Link to='/contacts/new' className='text-lg custom-button'>Add new Contact</Link>
          </div>
 
          <div className='bg-white  px-2 lg:px-10 py-5 rounded-3xl'>
