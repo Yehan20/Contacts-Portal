@@ -93,11 +93,13 @@ const AppProvider = ({children}) => {
   const register = async(email,password)=>{
     setLoading(true)
     setUserData('')
+    setSuccess(false)
       try{
          await axios.post('https://twc-contact-portal-api.onrender.com/register',{email,password});
          setSuccess(true)
          setShowMessageModal(true)
          setLoading(false)
+
       }catch(e){
          console.log(e.response.data.message);
          // can be same email or else
