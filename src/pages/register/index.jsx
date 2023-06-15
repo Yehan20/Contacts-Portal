@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import MessageModal from '../../components/messageModal';
 import SideBar from '../../components/sideBar'
 import { useGlobalContext } from '../../context/context';
@@ -12,6 +12,7 @@ const Register = () => {
     const [password,setPassword] = useState('');
     const [verifypassword,setVerifyPassword] = useState('');
     const [isSamePass,setIsSamePass]=useState(false);
+    const navigate =useNavigate();
 
     const handleSubmit = (e)=>{
 
