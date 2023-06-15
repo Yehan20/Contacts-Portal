@@ -2,10 +2,8 @@
 
 In this small app user can register and manage their own personal contacts
 
-![Image Description](./src/assets/images/lg.png)
-![Image Description](./src/assets/images/sm.png)
 
-Link to the application: https://yn-contacts-portact-twc.netlify.app/
+Link to the application: https://yn-contacts-portal.netlify.app/
 
 ### Try it out with these fake credentials
 
@@ -46,10 +44,10 @@ Open a terminal and clone this repo:
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/Yehan20/twc-test-web.git
+$ git clone https://github.com/Yehan20/Contacts-Portal
 
 # Go into the repository
-$ cd twc-test-web
+$ cd contacts-portal
 
 # Remove current origin repository
 $ git remote remove origin
