@@ -41,9 +41,9 @@ const Login = () => {
          <div className="login-section flex flex-col lg:flex-row justify-between" >
             <div className='login p-10  sm:px-20 sm:py-28 '>
                 <div className='text-white mb-5 sm:mb-14'>
-                    <h2 className=' text-heading-large font-bold '>Hi There
+                    <h2 className=' text-heading-large font-bold '>Hello
                     </h2>
-                    <p className='text-2xl sm:text-heading-medium mb-0 line'>Welcome to our <br /> contacts  portal</p>
+                    <p className='text-2xl sm:text-heading-medium mb-0 line'>Welcome to CP <br /> contacts  portal</p>
                 </div>
 
                 <form  onSubmit={(e)=>handleSubmit(e)} >
