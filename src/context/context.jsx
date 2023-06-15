@@ -52,17 +52,19 @@ const AppProvider = ({children}) => {
 
   const isLogged = async()=>{
      console.log('run');
+     setLoading(true)
      //http://localhost:3001/login
-     // https://glamorous-dove-skirt.cyclic.app/login
      try{
       const user = await axios.get('https://twc-contact-portal-api.onrender.com/login')
       console.log(user.data)
       setUserData(user.data.user)
       setLoggedUser(user.data.isLogged)
+      setLoading(false)
   
      }catch(e){
       if(e.response.data){
          setLoggedUser(e.response.data.isLogged)
+         setLoading(false)
       
       }
      }
@@ -71,7 +73,6 @@ const AppProvider = ({children}) => {
   const loginUser = async(email,password)=>{
      setLoading(true)
      //http://localhost:3001/login
-     //https://glamorous-dove-skirt.cyclic.app/login 
      try{
       const user = await axios.post('https://twc-contact-portal-api.onrender.com/login',{email,password})
       // update states
