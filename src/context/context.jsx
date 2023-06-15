@@ -103,8 +103,8 @@ const AppProvider = ({children}) => {
          localStorage.setItem('accessToken',user.data.accessToken);
          localStorage.setItem('refreshToken',user.data.refreshToken)
          
+         setLoggedUser(true)
          setUserData({email:user.data.email,_id:user.data._id});
-
         //  setSuccess(true)
         //  setShowMessageModal(true)
          setLoading(false)
