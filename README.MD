@@ -1,4 +1,4 @@
-# Contacts Portal App Solution
+# Contacts Portal
 
 In this small app user can register and manage their own personal contacts
 

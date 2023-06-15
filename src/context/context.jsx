@@ -17,6 +17,7 @@ const AppProvider = ({children}) => {
   const [userdata,setUserData] = useState('');
   const [success,setSuccess]= useState('');
   const [loading,setLoading] = useState(false)
+  const [apploading,setAppLoading] = useState(false)
 
   //refresh token function 
 
@@ -52,19 +53,19 @@ const AppProvider = ({children}) => {
 
   const isLogged = async()=>{
      console.log('run');
-     setLoading(true)
+     setAppLoading(true)
      //http://localhost:3001/login
      try{
       const user = await axios.get('https://twc-contact-portal-api.onrender.com/login')
       console.log(user.data)
       setUserData(user.data.user)
       setLoggedUser(user.data.isLogged)
-      setLoading(false)
+      setAppLoading(false)
   
      }catch(e){
       if(e.response.data){
          setLoggedUser(e.response.data.isLogged)
-         setLoading(false)
+         setAppLoading(false)
       
       }
      }
@@ -97,9 +98,15 @@ const AppProvider = ({children}) => {
     setUserData('')
 
       try{
-         await axios.post('https://twc-contact-portal-api.onrender.com/register',{email,password});
-         setSuccess(true)
-         setShowMessageModal(true)
+         const user =  await axios.post('https://twc-contact-portal-api.onrender.com/register',{email,password});
+      
+         localStorage.setItem('accessToken',user.data.accessToken);
+         localStorage.setItem('refreshToken',user.data.refreshToken)
+         
+         setUserData({email:user.data.email,_id:user.data._id});
+
+        //  setSuccess(true)
+        //  setShowMessageModal(true)
          setLoading(false)
 
       }catch(e){
@@ -150,7 +157,8 @@ const AppProvider = ({children}) => {
           register,
           success,
           logout,
-          loading
+          loading,
+          apploading
           
           }}>
        {children}

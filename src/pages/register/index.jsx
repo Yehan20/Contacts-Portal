@@ -6,14 +6,15 @@ import SideBar from '../../components/sideBar'
 import { useGlobalContext } from '../../context/context';
 
 const Register = () => {
-    const {showMessageModal,setShowMessageModal,errorMessage,success,register,loading} = useGlobalContext()
+    const {showMessageModal,setShowMessageModal,errorMessage,success,register,loading,userdata} = useGlobalContext()
 
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [verifypassword,setVerifyPassword] = useState('');
-    const[ isSamePass,setIsSamePass]=useState(false);
+    const [isSamePass,setIsSamePass]=useState(false);
 
     const handleSubmit = (e)=>{
+
         e.preventDefault();
          // check for empty user && Check for not matching passwords
          if(email==='' || password==='' || verifypassword==='' ){
@@ -28,9 +29,14 @@ const Register = () => {
          }
          register(email,password)
 
-         setEmail('');
-         setPassword('');
-         setVerifyPassword('')
+        //  setEmail('');
+        //  setPassword('');
+        //  setVerifyPassword('')
+
+         if(userdata){
+            console.log('correct');
+            navigate('/contacts',)
+          }
      
     }
 
@@ -63,7 +69,7 @@ const Register = () => {
         {(showMessageModal && !isSamePass ) && <MessageModal message="Fill all Feilds"/>}
         {(showMessageModal && isSamePass) && <MessageModal message="Not Matching Passwords"/>}
         {(showMessageModal && errorMessage) && <MessageModal message={errorMessage}/>}
-        {(showMessageModal && success) && <MessageModal redirectLogin={true} message={"User Created now you can login"}/>}
+        {/* {(showMessageModal && success) && <MessageModal redirectLogin={true} message={"User Created now you can login"}/>} */}
      </>
 
     )
