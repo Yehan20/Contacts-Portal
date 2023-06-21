@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { createRoutesFromElements, Route } from 'react-router'
 import { createBrowserRouter ,RouterProvider} from 'react-router-dom';
+import Loader from './components/loader';
 import NotFound from './components/notfound';
 import { useGlobalContext } from './context/context'
 import HomeLayout from './layouts/homeLayout';
@@ -14,7 +15,8 @@ import PrivateRoute from './privateroutes/privateHome';
 import ProtectedRoute from './privateroutes/protectedRoute';
 
 function App() {
-  const {isLogged,userdata} = useGlobalContext()
+  const {isLogged,userdata, appLoading} = useGlobalContext()
+
   useEffect(()=>{
       console.log(userdata)
       isLogged(userdata)
@@ -23,7 +25,7 @@ function App() {
 
  const router= createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<RootLayout />}>
+      <Route path="/" element={appLoading?<Loader/>:<RootLayout />}>
 
         <Route  index  element={
          <ProtectedRoute>

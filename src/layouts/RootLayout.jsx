@@ -4,10 +4,10 @@ import Loader from '../components/loader'
 import { useGlobalContext } from '../context/context'
 
 const RootLayout = () => {
-  const {appLoading} = useGlobalContext()
+
   return (
        <> 
-           {appLoading && <Loader/>}
+           {<Loader/>}
           <Outlet/> 
        </>
   )
