@@ -15,7 +15,7 @@ import PrivateRoute from './privateroutes/privateHome';
 import ProtectedRoute from './privateroutes/protectedRoute';
 
 function App() {
-  const {isLogged,userdata, appLoading} = useGlobalContext()
+  const {isLogged,userdata} = useGlobalContext()
 
   useEffect(()=>{
       console.log(userdata)
@@ -25,7 +25,7 @@ function App() {
 
  const router= createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/"  element={appLoading?<Loader/>:<RootLayout />}>
+      <Route path="/"  element={<RootLayout />}>
 
         <Route  index  element={
          <ProtectedRoute>
