@@ -7,7 +7,6 @@ const RootLayout = () => {
 
   return (
        <> 
-           {<Loader/>}
           <Outlet/> 
        </>
   )

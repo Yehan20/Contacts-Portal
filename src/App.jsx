@@ -25,7 +25,7 @@ function App() {
 
  const router= createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={appLoading?<Loader/>:<RootLayout />}>
+      <Route path="/"  element={appLoading?<Loader/>:<RootLayout />}>
 
         <Route  index  element={
          <ProtectedRoute>
