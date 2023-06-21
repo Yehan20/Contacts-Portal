@@ -4,6 +4,7 @@ import { useGlobalContext } from '../context/context'
 
 const ProtectedRoute = ({children}) => {
     const {loggedUser} = useGlobalContext()
+    console.log(loggedUser)
   
     if(loggedUser){
       return <Navigate to={'/contacts'} replace={true}/>
