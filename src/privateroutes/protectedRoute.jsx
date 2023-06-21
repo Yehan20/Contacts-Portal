@@ -8,7 +8,7 @@ const ProtectedRoute = ({children}) => {
     if(loggedUser){
       return <Navigate to={'/contacts'} replace={true}/>
     } 
-    return loggedUser===null?'': children
+    return loggedUser?'': children
   
 }
 
