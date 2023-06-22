@@ -11,7 +11,7 @@ const PrivateRoute = ({children}) => {
   if(userData){
     return children
   } 
-  return userData===null?'':<Navigate to={'/'} replace={true}/>
+  return userData===''?'':<Navigate to={'/'} replace={true}/>
 }
 
 export default PrivateRoute
