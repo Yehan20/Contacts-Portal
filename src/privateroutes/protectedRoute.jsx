@@ -3,13 +3,13 @@ import { Navigate } from 'react-router-dom'
 import { useGlobalContext } from '../context/context'
 
 const ProtectedRoute = ({children}) => {
-    const {loggedUser} = useGlobalContext()
-    console.log(loggedUser)
+    const {userData} = useGlobalContext()
+    // console.log(loggedUser)
   
-    if(loggedUser){
+    if(userData){
       return <Navigate to={'/contacts'} replace={true}/>
     } 
-    return loggedUser?'': children
+    return userData?'': children
   
 }
 

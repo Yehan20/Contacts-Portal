@@ -5,13 +5,13 @@ import { useGlobalContext } from '../context/context'
 
 const PrivateRoute = ({children}) => {
   // This would protect our home form unlogged users
-  const {loggedUser} = useGlobalContext()
+  const {userData} = useGlobalContext()
   // const navigate = useNavigate() 
   
-  if(loggedUser){
+  if(userData){
     return children
   } 
-  return loggedUser===null?'':<Navigate to={'/'} replace={true}/>
+  return userData===null?'':<Navigate to={'/'} replace={true}/>
 }
 
 export default PrivateRoute
