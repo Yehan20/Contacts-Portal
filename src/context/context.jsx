@@ -51,24 +51,30 @@ const AppProvider = ({children}) => {
     setSuccess(false)
   }
 
-  const isLogged = async()=>{
+  const isLogged = ()=>{
      console.log('run');
      setAppLoading(true)
      //http://localhost:3001/login
-     try{
-      const user = await axios.get('https://twc-contact-portal-api.onrender.com/login')
-      console.log(user.data)
-      setUserData(user.data.user)
-      setLoggedUser(user.data.isLogged)
-      setAppLoading(false)
-  
-     }catch(e){
-      if(e.response.data){
-         setLoggedUser(e.response.data.isLogged)
-         setAppLoading(false)
-      
-      }
+     const user = JSON.parse(localStorage.getItem('user'))
+     if(user){
+          setUserData(user)   
+     }else{
+          setUserData('')
      }
+    //  try{
+    //   const user = await axios.get('https://twc-contact-portal-api.onrender.com/login')
+    //   console.log(user.data)
+    //   setUserData(user.data.user)
+    //   setLoggedUser(user.data.isLogged)
+    //   setAppLoading(false)
+  
+    //  }catch(e){
+    //   if(e.response.data){
+    //      setLoggedUser(e.response.data.isLogged)
+    //      setAppLoading(false)
+      
+    //   }
+    //  }
   }
 
   const loginUser = async(email,password)=>{
@@ -83,6 +89,7 @@ const AppProvider = ({children}) => {
       // store token i local storeage
       localStorage.setItem('accessToken',user.data.accessToken);
       localStorage.setItem('refreshToken',user.data.refreshToken)
+      localStorage.setItem('user',JSON.stringify({email:user.data.email,_id:user.data._id}))
    
      }catch(e){
       // wrong login 
@@ -102,6 +109,7 @@ const AppProvider = ({children}) => {
       
          localStorage.setItem('accessToken',user.data.accessToken);
          localStorage.setItem('refreshToken',user.data.refreshToken)
+         localStorage.setItem('user',JSON.stringify({email:user.data.email,_id:user.data._id}))
          
          setLoggedUser(true)
          setUserData({email:user.data.email,_id:user.data._id});
